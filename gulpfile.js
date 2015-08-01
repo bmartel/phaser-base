@@ -8,7 +8,7 @@ var gulp = require('gulp'),
   tsd = require('gulp-tsd');
 
 var paths = {
-  assets: ['src/assets/images/**/*', 'src/assets/sound/**/*'],
+  assets: ['src/assets/**/*', '!src/assets/sass{,/**}'],
   vendor: 'lib/vendor',
   definitions: 'src/definitions',
   vendorDefinitions: 'lib/definitions',
