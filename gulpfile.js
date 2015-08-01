@@ -5,7 +5,8 @@ var gulp = require('gulp'),
   deploy = require('gulp-gh-pages'),
   del = require('del'),
   runSequence = require('run-sequence'),
-  tsd = require('gulp-tsd');
+  tsd = require('gulp-tsd'),
+  server = require('gulp-server-livereload');
 
 var paths = {
   assets: ['src/assets/**/*', '!src/assets/sass{,/**}'],
@@ -89,17 +90,13 @@ gulp.task('watch', function () {
   gulp.watch(paths.index, ['reload']);
 });
 
-gulp.task('connect', function () {
-  $.connect.server({
-    root: [__dirname + '/src', paths.build],
-    port: 9000,
-    livereload: true
-  });
-});
-
-gulp.task('open', function () {
-  gulp.src(paths.index)
-    .pipe($.open('', {url: 'http://localhost:9000'}));
+gulp.task('serve', function() {
+  gulp.src('./')
+    .pipe(server({
+      livereload: true,
+      defaultFile: 'src/index.html',
+      open: true
+    }));
 });
 
 gulp.task('minifyJs', ['typescript'], function () {
@@ -121,8 +118,9 @@ gulp.task('deploy', function () {
 });
 
 gulp.task('default', function () {
-  runSequence('clean', ['inject', 'typescript', 'sass', 'connect', 'watch'], 'open');
+  runSequence('clean', ['inject', 'typescript', 'sass', 'watch'], 'serve');
 });
+
 gulp.task('build', function () {
   return runSequence('clean', ['copy', 'minifyJs', 'minifyCss', 'processhtml']);
 });

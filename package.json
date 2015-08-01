@@ -17,6 +17,7 @@
     "gulp-open": "*",
     "gulp-processhtml": "*",
     "gulp-sass": "*",
+    "gulp-server-livereload": "^1.4.0",
     "gulp-sourcemaps": "*",
     "gulp-tsd": "*",
     "gulp-typescript": "*",
