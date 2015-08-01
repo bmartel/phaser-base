@@ -96,7 +96,6 @@ gulp.task('minifyJs', ['typescript'], function () {
   var all = bowerFiles().concat(paths.build + '/main.js');
   return gulp.src(all)
     .pipe($.uglifyjs('all.min.js', {outSourceMap: false, mangle: true}))
-    .pipe($.gzip())
     .pipe(gulp.dest(paths.dist));
 });
 
