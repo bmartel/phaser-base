@@ -79,15 +79,10 @@ gulp.task('inject', function () {
     .pipe(gulp.dest('src'));
 });
 
-gulp.task('reload', ['typescript'], function () {
-  gulp.src(paths.index)
-    .pipe($.connect.reload());
-});
-
 gulp.task('watch', function () {
-  gulp.watch(paths.ts, ['typescript', 'reload']);
-  gulp.watch(paths.sass, ['sass', 'reload']);
-  gulp.watch(paths.index, ['reload']);
+  gulp.watch(paths.ts, ['typescript']);
+  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.index);
 });
 
 gulp.task('serve', function() {
@@ -102,7 +97,7 @@ gulp.task('serve', function() {
 gulp.task('minifyJs', ['typescript'], function () {
   var all = bowerFiles().concat(paths.build + '/main.js');
   return gulp.src(all)
-    .pipe($.uglifyjs('all.min.js', {outSourceMap: false}))
+    .pipe($.uglifyjs('all.min.js', {outSourceMap: false, mangle: true}))
     .pipe(gulp.dest(paths.dist));
 });
 
