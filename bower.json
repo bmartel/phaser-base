@@ -1,0 +1,7 @@
+{
+  "name": "phaser-base-app",
+  "version": "0.0.0",
+  "dependencies": {
+    "phaser-official": "*"
+  }
+}
