@@ -10,6 +10,7 @@
     "gulp-concat-sourcemap": "*",
     "gulp-connect": "*",
     "gulp-gh-pages": "*",
+    "gulp-gzip": "^1.2.0",
     "gulp-inject": "*",
     "gulp-load-plugins": "*",
     "gulp-minify-css": "*",

@@ -4,9 +4,7 @@ var gulp = require('gulp'),
   concat = require('gulp-concat-sourcemap'),
   deploy = require('gulp-gh-pages'),
   del = require('del'),
-  runSequence = require('run-sequence'),
-  tsd = require('gulp-tsd'),
-  server = require('gulp-server-livereload');
+  runSequence = require('run-sequence');
 
 var paths = {
   assets: ['src/assets/**/*', '!src/assets/sass{,/**}'],
@@ -27,7 +25,7 @@ gulp.task('tsd', function (cb) {
     ])
     .pipe(gulp.dest(paths.definitions));
 
-    return tsd({
+    return $.tsd({
         command: 'reinstall',
         latest: true,
         config: './tsd.json'
@@ -87,7 +85,7 @@ gulp.task('watch', function () {
 
 gulp.task('serve', function() {
   gulp.src('./')
-    .pipe(server({
+    .pipe($.serverLivereload({
       livereload: true,
       defaultFile: 'src/index.html',
       open: true
@@ -98,6 +96,7 @@ gulp.task('minifyJs', ['typescript'], function () {
   var all = bowerFiles().concat(paths.build + '/main.js');
   return gulp.src(all)
     .pipe($.uglifyjs('all.min.js', {outSourceMap: false, mangle: true}))
+    .pipt($.gzip())
     .pipe(gulp.dest(paths.dist));
 });
 
