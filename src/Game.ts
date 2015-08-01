@@ -4,8 +4,8 @@ module App {
   export class Game extends Phaser.Game {
     constructor() {
       super({
-        width: 800,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
         transparent: false,
         enableDebug: true
       });

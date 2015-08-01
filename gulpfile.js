@@ -7,11 +7,11 @@ var gulp = require('gulp'),
   runSequence = require('run-sequence');
 
 var paths = {
-  assets: ['src/assets/**/*', '!src/assets/sass{,/**}'],
+  assets: ['assets/**/*', '!assets/sass{,/**}'],
   vendor: 'lib/vendor',
   definitions: 'src/definitions',
   vendorDefinitions: 'lib/definitions',
-  sass: 'src/assets/sass/main.sass',
+  sass: 'assets/sass/main.sass',
   index: 'src/index.html',
   ts: 'src/**/*.ts',
   build: 'build',
@@ -74,7 +74,7 @@ gulp.task('processhtml', function () {
 gulp.task('inject', function () {
   return gulp.src(paths.index)
     .pipe($.inject(gulp.src(bowerFiles()), {name: 'bower', relative: true}))
-    .pipe(gulp.dest('src'));
+    .pipe(gulp.dest(paths.build));
 });
 
 gulp.task('watch', function () {
@@ -87,7 +87,7 @@ gulp.task('serve', function() {
   gulp.src('./')
     .pipe($.serverLivereload({
       livereload: true,
-      defaultFile: 'src/index.html',
+      defaultFile: 'build/index.html',
       open: true
     }));
 });
